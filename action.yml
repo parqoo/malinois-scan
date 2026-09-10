@@ -78,7 +78,7 @@ runs:
             "
           fi
           echo "_Passive external check, not a penetration test._"
-          echo "_Continuous monitoring on every deploy: https://malinois.app_"
+          echo "_Continuous monitoring on every deploy: https://malinois.app/?src=gh-action_"
         } >> "$GITHUB_STEP_SUMMARY"
 
         if [ "$MALINOIS_JSON" != "true" ]; then rm -f malinois-report.json; fi

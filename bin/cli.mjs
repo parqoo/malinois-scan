@@ -15,7 +15,7 @@ const HELP = `
 malinois-scan — passive security check for a deployed web app
 
 USAGE
-  npx malinois-scan <url> --i-own-this [options]
+  npx github:parqoo/malinois-scan <url> --i-own-this [options]
 
 OPTIONS
   --i-own-this        Required. Confirms you own the app or have permission.
@@ -26,8 +26,8 @@ OPTIONS
   -h, --help          Show this help.
 
 EXAMPLES
-  npx malinois-scan https://my-app.example --i-own-this
-  npx malinois-scan https://my-app.example --i-own-this --json --fail-on critical
+  npx github:parqoo/malinois-scan https://my-app.example --i-own-this
+  npx github:parqoo/malinois-scan https://my-app.example --i-own-this --json --fail-on critical
 
 WHAT IT CHECKS
   Publicly readable databases (Supabase / Firebase), secrets left in client
@@ -36,7 +36,7 @@ WHAT IT CHECKS
   and missing security headers.
 
 Continuous monitoring (re-check on every deploy, alert on new leaks):
-  https://malinois.app
+  https://malinois.app/?src=gh_cli
 `;
 
 const argv = process.argv.slice(2);
@@ -149,7 +149,7 @@ if (asJson) {
     }
   }
   process.stdout.write(`  ${c('90', 'Passive external check, not a penetration test.')}\n`);
-  process.stdout.write(`  ${c('90', 'Continuous monitoring on every deploy: https://malinois.app')}\n\n`);
+  process.stdout.write(`  ${c('90', 'Continuous monitoring on every deploy: https://malinois.app/?src=gh_cli')}\n\n`);
 }
 
 const threshold = severityRank(failOn);

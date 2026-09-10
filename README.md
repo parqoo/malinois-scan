@@ -129,10 +129,10 @@ This is a defensive tool and it is built to stay one.
 This CLI answers "is it leaking right now?". It does not answer "did something break at
 3am on Tuesday?".
 
-[**Malinois**](https://malinois.app) is the hosted side: it re-checks your app on a
+[**Malinois**](https://malinois.app/?src=gh_readme) is the hosted side: it re-checks your app on a
 schedule, keeps the history, and emails you the moment a *new* leak appears that wasn't
 there before — including a plain-language report you can hand to someone non-technical.
-Free passive check in the browser, no signup: <https://malinois.app>
+Free passive check in the browser, no signup: <https://malinois.app/?src=gh_readme>
 
 ## FAQ
 
