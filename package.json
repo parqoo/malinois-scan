@@ -1,0 +1,49 @@
+{
+  "name": "malinois-scan",
+  "version": "0.1.0",
+  "description": "Passive security check for a deployed web app — finds publicly readable databases, secrets left in client bundles, and exposed files. Built for apps shipped with AI builders (Lovable, Replit, Bolt, v0, Base44).",
+  "type": "module",
+  "bin": {
+    "malinois-scan": "bin/cli.mjs"
+  },
+  "exports": {
+    ".": "./src/scanner.js",
+    "./explain": "./src/explain.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "action.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "security",
+    "scanner",
+    "supabase",
+    "firebase",
+    "rls",
+    "secret-detection",
+    "vibe-coding",
+    "lovable",
+    "replit",
+    "bolt",
+    "appsec",
+    "ci"
+  ],
+  "license": "MIT",
+  "homepage": "https://malinois.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parqoo/malinois-scan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/parqoo/malinois-scan/issues"
+  }
+}

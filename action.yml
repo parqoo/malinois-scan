@@ -1,0 +1,85 @@
+name: 'Malinois Scan'
+description: 'Passive security check for your deployed app. Fails the build when a new leak appears — public databases, secrets in client bundles, exposed .env/.git.'
+author: 'Malinois'
+branding:
+  icon: 'shield'
+  color: 'yellow'
+
+inputs:
+  url:
+    description: 'The deployed URL to check. Must be an app you own.'
+    required: true
+  fail-on:
+    description: 'Fail the job when a finding at/above this level is found: critical | high | medium | low'
+    required: false
+    default: 'high'
+  json:
+    description: 'Also write machine-readable results to $GITHUB_OUTPUT and a report.json artifact path'
+    required: false
+    default: 'false'
+
+outputs:
+  grade:
+    description: 'Letter grade A-F for the scanned deployment'
+    value: ${{ steps.scan.outputs.grade }}
+  score:
+    description: 'Score 0-100'
+    value: ${{ steps.scan.outputs.score }}
+  findings:
+    description: 'Number of findings (excluding informational scan notes)'
+    value: ${{ steps.scan.outputs.findings }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run Malinois passive scan
+      id: scan
+      shell: bash
+      env:
+        MALINOIS_URL: ${{ inputs.url }}
+        MALINOIS_FAIL_ON: ${{ inputs.fail-on }}
+        MALINOIS_JSON: ${{ inputs.json }}
+      run: |
+        set +e
+        node "${{ github.action_path }}/bin/cli.mjs" "$MALINOIS_URL" \
+          --i-own-this --json --fail-on "$MALINOIS_FAIL_ON" --no-color > malinois-report.json
+        code=$?
+        set -e
+
+        if [ ! -s malinois-report.json ]; then
+          echo "::error::malinois-scan produced no output"
+          exit 2
+        fi
+
+        grade=$(node -e "const r=require('./malinois-report.json');console.log(r.grade||'')")
+        score=$(node -e "const r=require('./malinois-report.json');console.log(r.score??'')")
+        count=$(node -e "const r=require('./malinois-report.json');console.log((r.findings||[]).length)")
+
+        echo "grade=$grade"     >> "$GITHUB_OUTPUT"
+        echo "score=$score"     >> "$GITHUB_OUTPUT"
+        echo "findings=$count"  >> "$GITHUB_OUTPUT"
+
+        {
+          echo "## 🛡️ Malinois scan — Grade $grade ($score/100)"
+          echo ""
+          if [ "$count" = "0" ]; then
+            echo "No issues found in the passive checks."
+          else
+            echo "$count issue(s) found:"
+            echo ""
+            node -e "
+              const r=require('./malinois-report.json');
+              for (const f of r.findings||[]) {
+                console.log('### ' + f.severity.toUpperCase() + ' — ' + f.title);
+                if (f.what_it_means) console.log('**What it means:** ' + f.what_it_means);
+                if (f.what_to_do)    console.log('**What to do:** ' + f.what_to_do);
+                console.log('');
+              }
+            "
+          fi
+          echo "_Passive external check, not a penetration test._"
+          echo "_Continuous monitoring on every deploy: https://malinois.app_"
+        } >> "$GITHUB_STEP_SUMMARY"
+
+        if [ "$MALINOIS_JSON" != "true" ]; then rm -f malinois-report.json; fi
+        exit $code
