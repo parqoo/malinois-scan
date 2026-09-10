@@ -1,0 +1,45 @@
+name: Action self-test
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Proves the published Action actually runs for a stranger. If this job breaks,
+# every README instruction is a lie, so it runs on every push.
+jobs:
+  action-works:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Action runs and reports a grade (clean threshold)
+        id: scan
+        uses: ./
+        with:
+          url: https://example.com
+          fail-on: critical
+
+      - name: Outputs are populated
+        run: |
+          echo "grade=${{ steps.scan.outputs.grade }}"
+          echo "score=${{ steps.scan.outputs.score }}"
+          echo "findings=${{ steps.scan.outputs.findings }}"
+          test -n "${{ steps.scan.outputs.grade }}"    || { echo "::error::grade output empty"; exit 1; }
+          test -n "${{ steps.scan.outputs.score }}"    || { echo "::error::score output empty"; exit 1; }
+          test -n "${{ steps.scan.outputs.findings }}" || { echo "::error::findings output empty"; exit 1; }
+
+      - name: Fails the build when a finding crosses the threshold
+        id: shouldfail
+        continue-on-error: true
+        uses: ./
+        with:
+          url: https://example.com
+          fail-on: low
+
+      - name: ...and that failure was the expected one
+        run: |
+          if [ "${{ steps.shouldfail.outcome }}" != "failure" ]; then
+            echo "::error::fail-on: low should have failed the step"
+            exit 1
+          fi
+          echo "gate works: build fails when findings cross the threshold"
