@@ -53,6 +53,19 @@ that** — which is exactly what a check in CI catches.
 Every finding comes with **what it means** and **what to do**, in plain language — not just
 a rule name.
 
+### Fixing what it finds
+
+Longer write-ups for the findings people hit most, including the exact errors you'll see
+while fixing them:
+
+- **[Supabase RLS](docs/supabase-rls.md)** — `new row violates row-level security policy`,
+  `permission denied for table`, and the silent case where RLS is simply off
+- **[Which keys are safe in a browser bundle](docs/leaked-keys.md)** — anon vs
+  `service_role`, why `NEXT_PUBLIC_`/`VITE_` secrets aren't secret
+- **[Firebase security rules](docs/firebase-rules.md)** — `Missing or insufficient
+  permissions`, and open test-mode rules that never error
+- **[Exposed `.env`, `.git`, source maps](docs/exposed-files.md)** — what to rotate after
+
 ## Use it in CI (the part that actually matters)
 
 Add this and your build fails the moment a deploy introduces a leak:
