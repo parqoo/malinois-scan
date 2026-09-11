@@ -15,7 +15,7 @@ const HELP = `
 malinois-scan — passive security check for a deployed web app
 
 USAGE
-  npx github:parqoo/malinois-scan <url> --i-own-this [options]
+  npx malinois-scan <url> --i-own-this [options]
 
 OPTIONS
   --i-own-this        Required. Confirms you own the app or have permission.
@@ -26,8 +26,8 @@ OPTIONS
   -h, --help          Show this help.
 
 EXAMPLES
-  npx github:parqoo/malinois-scan https://my-app.example --i-own-this
-  npx github:parqoo/malinois-scan https://my-app.example --i-own-this --json --fail-on critical
+  npx malinois-scan https://my-app.example --i-own-this
+  npx malinois-scan https://my-app.example --i-own-this --json --fail-on critical
 
 WHAT IT CHECKS
   Publicly readable databases (Supabase / Firebase), secrets left in client

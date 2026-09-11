@@ -96,7 +96,7 @@ from the outside — the same view an attacker has — for tables readable witho
 bundles, and exposed files:
 
 ```bash
-npx github:parqoo/malinois-scan https://your-app.example --i-own-this
+npx malinois-scan https://your-app.example --i-own-this
 ```
 
 It only reads what any visitor could already see, and `--i-own-this` is required.

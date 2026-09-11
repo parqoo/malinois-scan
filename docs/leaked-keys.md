@@ -73,7 +73,7 @@ Reading your own source will not tell you — the bundle is what ships, and it i
 more than the file you are looking at.
 
 ```bash
-npx github:parqoo/malinois-scan https://your-app.example --i-own-this
+npx malinois-scan https://your-app.example --i-own-this
 ```
 
 This fetches your deployed HTML and JavaScript the way a visitor does and pattern-matches for

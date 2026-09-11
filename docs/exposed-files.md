@@ -69,7 +69,7 @@ your `.env` in it.
 Your local repo cannot tell you what your host is serving.
 
 ```bash
-npx github:parqoo/malinois-scan https://your-app.example --i-own-this
+npx malinois-scan https://your-app.example --i-own-this
 ```
 
 The check is a plain GET, the same request a browser makes. Findings report that the path

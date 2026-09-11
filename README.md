@@ -3,7 +3,7 @@
 **Passive security check for an app you just shipped.** One command, no signup, no account, no agent installed.
 
 ```bash
-npx github:parqoo/malinois-scan https://my-app.example --i-own-this
+npx malinois-scan https://my-app.example --i-own-this
 ```
 
 ```
@@ -94,7 +94,7 @@ The job summary shows the grade and every finding. Outputs `grade`, `score`, and
 ## CLI options
 
 ```
-npx github:parqoo/malinois-scan <url> --i-own-this [options]
+npx malinois-scan <url> --i-own-this [options]
 
   --i-own-this        Required. Confirms you own the app or have permission.
   --json              Machine-readable output (for CI).
@@ -103,9 +103,6 @@ npx github:parqoo/malinois-scan <url> --i-own-this [options]
 ```
 
 Exit codes: `0` clean (below threshold) · `1` findings at/above threshold · `2` scan error.
-
-> Runs straight from source with no install step. An `npm` release (`npx malinois-scan`)
-> is planned; until then the `github:` form above is the supported entry point.
 
 ## Use it as a library
 

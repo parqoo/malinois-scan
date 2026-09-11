@@ -86,7 +86,7 @@ that never applies, a rule published to the wrong database, a second RTDB instan
 remembers.
 
 ```bash
-npx github:parqoo/malinois-scan https://your-app.example --i-own-this
+npx malinois-scan https://your-app.example --i-own-this
 ```
 
 This reads your deployed page for a Firebase config and then checks whether the database
