@@ -102,7 +102,12 @@ https://malinois.app/mcp
 
 - **Lovable** — Chat connectors → Custom MCP → paste the URL (no authentication).
 - **Claude Code** — `claude mcp add --transport http malinois https://malinois.app/mcp`
-- **Cursor / VS Code** — `{ "mcpServers": { "malinois": { "url": "https://malinois.app/mcp" } } }`
+- **Cursor / VS Code** — one click:
+
+  [![Install in Cursor](https://img.shields.io/badge/Cursor-Install_Malinois-000000?logo=cursor&logoColor=white)](https://cursor.com/install-mcp?name=malinois&config=eyJ1cmwiOiJodHRwczovL21hbGlub2lzLmFwcC9tY3AifQ%3D%3D)
+  [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Malinois-0098FF?logo=visualstudiocode&logoColor=white)](https://vscode.dev/redirect/mcp/install?name=malinois&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmalinois.app%2Fmcp%22%7D)
+
+  or add `{ "mcpServers": { "malinois": { "url": "https://malinois.app/mcp" } } }` to `mcp.json`.
 - **Claude, ChatGPT and other chat apps** — add a custom connector with the URL.
 
 Same engine and the same boundaries as this CLI: passive only, ownership confirmation
