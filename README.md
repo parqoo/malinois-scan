@@ -91,6 +91,23 @@ jobs:
 The job summary shows the grade and every finding. Outputs `grade`, `score`, and
 `findings` are available to later steps.
 
+## Use it from your AI builder (MCP)
+
+Don't want a terminal? Add the hosted MCP server to the assistant you already build with, then
+ask it: *"Check https://my-app.lovable.app for leaks — I own it."*
+
+```
+https://malinois.app/mcp
+```
+
+- **Lovable** — Chat connectors → Custom MCP → paste the URL (no authentication).
+- **Claude Code** — `claude mcp add --transport http malinois https://malinois.app/mcp`
+- **Cursor / VS Code** — `{ "mcpServers": { "malinois": { "url": "https://malinois.app/mcp" } } }`
+- **Claude, ChatGPT and other chat apps** — add a custom connector with the URL.
+
+Same engine and the same boundaries as this CLI: passive only, ownership confirmation
+required, private and metadata addresses refused, secrets masked.
+
 ## CLI options
 
 ```
